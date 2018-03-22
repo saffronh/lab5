@@ -212,7 +212,7 @@ Example of use:
           Cons (3,
            {contents =
              Cons (4,
-              {contents = Cons (5, {contents = Cons (6, {contents = Nil})})})})})})
+          {contents = Cons (5, {contents = Cons (6, {contents = Nil})})})})})})
  *)
 
 let rec mappend (m1 : 'a mlist) (m2 : 'a mlist) : unit =
@@ -318,7 +318,7 @@ module MakeImpQueue (A : sig
       let rec helper r =
         match deq r with
         | None -> "||"
-        | Some h -> (A.to_string h) " -> " ^ helper r in
+        | Some h -> (A.to_string h) ^ " -> " ^ helper r in
         helper p
   end ;;
 
