@@ -221,7 +221,7 @@ let rec mappend (m1 : 'a mlist) (m2 : 'a mlist) : unit =
   | Cons (_, t1) ->
       match !t1 with
       | Nil -> t1 := m2
-      | Cons (_, y) -> mappend !y m2 ;;
+      | Cons _ -> mappend !t1 m2 ;;
 
 
 (* What happens when you evaluate the following expressions
@@ -314,7 +314,12 @@ module MakeImpQueue (A : sig
          Some h
       | Nil -> None
     let to_string q =
-      failwith "to_string not implemented"
+      let p = q in
+      let rec helper r =
+        match deq r with
+        | None -> "||"
+        | Some h -> (A.to_string h) " -> " ^ helper r in
+        helper p
   end ;;
 
 (* To build an imperative queue, we apply the functor to an
